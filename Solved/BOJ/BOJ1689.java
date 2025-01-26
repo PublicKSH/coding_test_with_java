@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 // 문제 접근 방식 
-public class Main {
+public class BOJ1689 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args) throws IOException {
