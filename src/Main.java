@@ -1,12 +1,17 @@
-import java.util.Arrays;
+// 스위핑
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+// 스위핑
 public class Main {
-	public static void main(String[] args) {
-		Integer[] integerArr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-		String[] stringArr = { "a", "a", "a", "a", "a" };
-		List<Integer> integerList = Arrays.asList(integerArr);
-		
-		System.out.println(integerList.contains(1));
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) throws IOException {
+		int N = Integer.parseInt(br.readLine());		
+
+		System.out.println("1");
 	}
 }
