@@ -1,59 +1,49 @@
-// 풀이시간 10분 => 스위핑 문제 1945, 2170 두개 풀고 바로 풀어서 그런것 같다.
+package coding_space;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Arrays;
 
-// 문제 접근 방식 
 public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args) throws IOException {
-		int N = Integer.parseInt(br.readLine());
-		List<Point> pointList = new ArrayList<>();
-		for (int i = 0; i < N; i++) {
-			String[] st = br.readLine().split(" ");
-			pointList.add(new Point(Integer.parseInt( st[0]), 1));
-			pointList.add(new Point(Integer.parseInt( st[1]), -1));
-		}
-		
-		pointList.sort(getPointCom());
-		int sum = 0;
-		int result = 0;
-		for (Point p : pointList) {
-			result = Math.max(sum, result);
-			sum += p.isLeft;
-		}
-		
-		System.out.println(result);
-	}
-	
-	public static class Point {
-		int x;
-		int isLeft;
-		
-		Point(int x, int isLeft) {
-			this.x = x;
-			this.isLeft = isLeft;
-		}
-	}
-	
-	public static Comparator<Point> getPointCom() {
-		return new Comparator<Point>() {
-			@Override
-			public int compare(Point p1, Point p2) {
-				int compareX = Integer.compare(p1.x, p2.x);
-				
-				if (compareX == 0) {
-					// -1 이 먼저와야함 -> 선분 점에서 겹치는건 겹치는게 아니라
-					return Integer.compare(p1.isLeft, p2.isLeft);
-				} else {
-					return compareX;
+		String a = br.readLine();
+		String b = br.readLine();
+		int[][] dp = new int[a.length() + 1][b.length() + 1];
+		// 최장 공통부분의 마지막 문자열 위치
+		int x = 0;
+		int y = 0;
+		int max = 0;
+		for (int i = 1; i < a.length() + 1; i++) {
+			for (int j = 1; j < b.length() + 1; j++) {
+				dp[i][j] = Math.max(dp[i][j - 1], Math.max(dp[i - 1][j], dp[i - 1][j - 1]));
+				if (b.charAt(i - 1) == a.charAt(j - 1)) {
+					dp[i][j]++;
+					if (dp[i][j] > max) {
+						max = dp[i][j];
+						x = i;
+						y = j;
+					}
 				}
 			}
-		};
+		}
+
+		for (int[] arr1D : dp) {
+			System.out.println(Arrays.toString(arr1D));
+		}
+		System.out.println(max);
+		if (max != 0) {
+			// 거슬러 올라가면서 예제 출력
+			StringBuffer sb = new StringBuffer();
+			
+			// 현재 위치의 상, 좌 현재 값보다 -1이면 sb.append
+			// 현재 위치의 상 값이 현재 값보다 -1 이고 좌 값이 현재 값이랑 같으면 현재 위치의 좌 값--
+			// 현재 위치의 좌 값이 현재 값보다 -1 이고 상 값이 현재 값이랑 같으면 현재 위치의 상 값--
+			// 현재 위치의 상, 좌 값이 모두 현재 값이랑 같이랑 같으면 현재 위치의 좌 값 --;
+			
+			// 따로 저장해 두고 현재 값의 상,좌 값만 비교할까?
+		}
 	}
 }
