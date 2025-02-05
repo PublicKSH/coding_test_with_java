@@ -25,7 +25,7 @@ class Solution {
 
 				cnt++;
 			}
-
+			
 			System.out.printf("#%d %d\n", test_case, cnt * N);
 		}
 	}
