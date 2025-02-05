@@ -1,5 +1,3 @@
-package coding_space;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,10 +21,13 @@ public class Main {
 				st = new StringTokenizer(br.readLine(), " ");
 				for (int j = 0; j < N; j++) {
 					rupeeMap[i][j] = Integer.parseInt(st.nextToken());
+					resultMap[i][j] = Integer.MAX_VALUE;
 				}
 			}
 
-			System.out.printf("Problem %d: %d\n", tc + 1, 0);
+			djik(rupeeMap, resultMap);
+			
+			System.out.printf("Problem %d: %d\n", tc + 1, resultMap[N-1][N-1]);
 		}
 	}
 
@@ -37,12 +38,21 @@ public class Main {
 
 		while (!queue.isEmpty()) {
 			Node nn = queue.poll();
-
+//			System.out.println(nn.x +" " + nn.y);
 			for (int i = 0; i < 4; i++) {
 				int nx = nn.x + d[i][0];
 				int ny = nn.y + d[i][1];
 				
-//				if (nx < 0 || ny < 0 ||)
+				if (nx < 0 || ny < 0 || nx >= rupeeMap.length || ny >= rupeeMap[0].length) {
+					continue;
+				}
+				
+				int cost = resultMap[nn.x][nn.y] + rupeeMap[nx][ny];
+				if (cost < resultMap[nx][ny]) {
+					resultMap[nx][ny] = cost;
+					
+					queue.offer(new Node(nx,ny));
+				}
 				
 			}
 		}
